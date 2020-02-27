@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ReminderApp</string>
+    <string name="msg_welcome">Reminder App</string>
+    <string name="reg_email">Email</string>
+    <string name="reg_password">Password</string>
+    <string name="reg_password2">Verify Password</string>
+    <string name="btn_signin">Sign In</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_logout">Log Out</string>
 </resources>
