@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "577548670577",
+    "firebase_url": "https://cit368-reminder-app.firebaseio.com",
+    "project_id": "cit368-reminder-app",
+    "storage_bucket": "cit368-reminder-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577548670577:android:b3b0f4c5f9cc67bfe32dd0",
+        "android_client_info": {
+          "package_name": "net.cit368.reminderapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577548670577-jafjvmjorr90d82v2ee4506pm0bfdt6g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4UirjlzNpyxDt_ZfGuwnfxQQy0uqb8qQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577548670577-jafjvmjorr90d82v2ee4506pm0bfdt6g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
