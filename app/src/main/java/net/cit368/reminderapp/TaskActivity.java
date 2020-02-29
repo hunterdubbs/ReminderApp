@@ -35,7 +35,7 @@ public class TaskActivity extends AppCompatActivity {
 
         final Button logoutBtn = findViewById(R.id.logoutBtn);
         final Button taskBtn = findViewById(R.id.newTaskBtn);
-
+        final Button accountBtn = findViewById(R.id.accountBtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +52,12 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createTask(view);
+            }
+        });
+        accountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TaskActivity.this, AccountActivity.class));
             }
         });
     }

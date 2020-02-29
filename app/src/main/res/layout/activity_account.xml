@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountActivity"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp"
@@ -36,7 +37,7 @@
         tools:layout_editor_absoluteX="28dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signup_input_layout_email"
+            android:id="@+id/update_input_layout_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -44,33 +45,12 @@
             android:textColorHint="#C5C6C7">
 
             <EditText
-                android:id="@+id/txtUsername"
+                android:id="@+id/txtNewPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:textColor="#C5C6C7"
-                android:textColorHighlight="#4E4E50"
-                android:textColorHint="#C5C6C7" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signup_input_layout_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:textColorHint="#C5C6C7">
-
-            <EditText
-                android:id="@+id/txtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#C5C6C7"
-                android:ems="10"
-                android:hint="Password (8-40 chars)"
+                android:hint="New Password (8-40 chars)"
                 android:inputType="textPassword"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
@@ -78,7 +58,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signup_input_layout_confirmpw"
+            android:id="@+id/update_input_layout_confirmpw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -91,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Confirm Password"
+                android:hint="Confirm New Password"
                 android:inputType="textPassword"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
@@ -100,13 +80,14 @@
 
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnUpdate"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="#2196F3"
-            android:text="Register"
+            android:text="Update Password"
             android:textColor="#C5C6C7" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
