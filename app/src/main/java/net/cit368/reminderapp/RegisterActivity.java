@@ -12,12 +12,12 @@ import android.widget.Toast;
 
 /**
  * @author Hunter Dubbs
- * @version 2/28/2020
+ * @version 2/29/2020
  * This class allows the user to input a username and password and validates them.
  */
 public class RegisterActivity extends AppCompatActivity {
 
-    private String username, password;
+    private String username, password, confirmPassword;
 
     /**
      * Configure form fields and create submit button listener
@@ -29,12 +29,14 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         final EditText txtUsername = findViewById(R.id.txtUsername);
         final EditText txtPassword = findViewById(R.id.txtPassword);
+        final EditText txtConfirmPassword = findViewById(R.id.txtConfirmPassword);
         Button btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 username = txtUsername.getText().toString();
                 password = txtPassword.getText().toString();
+                confirmPassword = txtConfirmPassword.getText().toString();
                 if(validate()) finish();
             }
         });
@@ -45,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
      * @return true if both fields validate successfully
      */
     public boolean validate(){
-        return validateUsername() && validatePassword();
+        return validateUsername() && validatePassword() && validateConfirmPassword();
     }
 
     /**
@@ -73,6 +75,18 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
+     * Validates the confirm password field to ensure both passwords match
+     * @return true if the passwords match
+     */
+    public boolean validateConfirmPassword(){
+        if(password.equals(confirmPassword)){
+            return true;
+        }
+        Toast.makeText(RegisterActivity.this, "Passwords do not Match", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    /**
      * Returns the validated fields back to MainActivity to actually generate the account.
      */
     @Override
@@ -83,4 +97,5 @@ public class RegisterActivity extends AppCompatActivity {
         setResult(RESULT_OK, result);
         super.finish();
     }
+
 }
