@@ -20,12 +20,21 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @Author Hunter Dubbs
+ * @version 2/29/2020
+ * This class allows the user to sign in to their account or create a new one.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static final int SIGNIN_CODE = 1, REGISTER_CODE = 2;
-    private FirebaseAuth auth;
+    public FirebaseAuth auth;
     public FirebaseUser user;
 
+    /**
+     * Setup buttons and button click handlers
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,21 +57,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * When the activity starts, it should check if a user is already logged in.
+     */
     @Override
     public void onStart(){
         super.onStart();
         user = auth.getCurrentUser();
         //the user can bypass sign in if they are already signed in
         if(user != null){
-            //TODO redirect to tasks activity
+            startActivity(new Intent(MainActivity.this, TaskActivity.class));
         }
     }
 
+    /**
+     * Utilizes the Firebase AuthUI built-in class to handle exister user login
+     */
     public void createSigninIntent(){
         List<AuthUI.IdpConfig> signinMethods = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build());
         startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(signinMethods).build(), SIGNIN_CODE);
     }
 
+    /**
+     * This method handles data returned from activities called to handle sign in and register functions.
+     * @param requestCode the code corresponding to what activity is returning the result
+     * @param resultCode the result of the activity
+     * @param data the data returned by the activity
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -70,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
                 user = FirebaseAuth.getInstance().getCurrentUser();
-                //TODO redirect to tasks page
+                startActivity(new Intent(MainActivity.this, TaskActivity.class));
                 System.out.println("======================LOG IN SUCCESSFUL======================");
             } else {
                 Toast.makeText(MainActivity.this, "Log In Failed", Toast.LENGTH_SHORT).show();
@@ -86,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                             System.out.println("======================user created successfully======================");
                             user = auth.getCurrentUser();
                             Toast.makeText(MainActivity.this, "Log In Successful", Toast.LENGTH_SHORT).show();
-                            //TODO redirect to tasks activity
+                            startActivity(new Intent(MainActivity.this, TaskActivity.class));
                         }else{
                             System.out.println("======================create account failed======================");
                             Toast.makeText(MainActivity.this, "Could not create account", Toast.LENGTH_LONG).show();
@@ -97,15 +118,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void signOut() {
-        AuthUI.getInstance()
-                .signOut(this)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    public void onComplete(@NonNull Task<Void> task) {
-                        System.out.println("LOGGED OUT");
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    }
-                });
-    }
+    //Not needed here, handled in TaskActivity.
+//    public void signOut() {
+//        AuthUI.getInstance()
+//                .signOut(this)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        System.out.println("LOGGED OUT");
+//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    }
+//                });
+//    }
 
 }

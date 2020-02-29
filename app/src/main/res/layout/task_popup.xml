@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#000">
+
+    <EditText
+        android:id="@+id/recycleTaskName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TaskName"
+        android:textColor="#FFF"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/recycleTaskDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#FFF"
+        android:text="TaskDuration" />
+
+    <EditText
+        android:id="@+id/recycleTaskStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#FFF"
+        android:text="TaskStartDate" />
+
+    <EditText
+        android:id="@+id/recycleTaskLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#FFF"
+        android:text="TaskLocation" />
+
+</LinearLayout>
