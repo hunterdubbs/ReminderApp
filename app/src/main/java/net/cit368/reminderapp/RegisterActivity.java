@@ -30,12 +30,21 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText txtUsername = findViewById(R.id.txtUsername);
         final EditText txtPassword = findViewById(R.id.txtPassword);
         Button btnRegister = findViewById(R.id.btnRegister);
+        Button btnLogin = findViewById(R.id.btnLogin);
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 username = txtUsername.getText().toString();
                 password = txtPassword.getText().toString();
                 if(validate()) finish();
+            }
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLoginActivity();
             }
         });
     }
@@ -82,5 +91,13 @@ public class RegisterActivity extends AppCompatActivity {
         result.putExtra("password", password);
         setResult(RESULT_OK, result);
         super.finish();
+    }
+
+    /**
+     * Login button onClick
+     */
+    private void openLoginActivity() {
+        Intent login = new Intent(this, LoginActivity.class);
+        startActivity(login);
     }
 }
