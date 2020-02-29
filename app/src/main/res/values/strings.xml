@@ -7,4 +7,5 @@
     <string name="btn_signin">Sign In</string>
     <string name="btn_register">Register</string>
     <string name="btn_logout">Log Out</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

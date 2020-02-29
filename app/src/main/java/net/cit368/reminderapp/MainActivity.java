@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startActivity(new Intent(MainActivity.this, MapsActivity.class));
         auth = FirebaseAuth.getInstance();
         Button btnSignin = findViewById(R.id.btn_signin);
         Button btnRegister = findViewById(R.id.btn_register);
