@@ -1,5 +1,11 @@
 package net.cit368.reminderapp;
 
+/**
+ *  Class is used to operate the map functions for the user to choose a location
+ *
+ *
+ *
+ */
 
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -47,15 +53,8 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
     private static final String TAG = MapsActivityCurrentPlace.class.getSimpleName();
     private GoogleMap mMap;
     private CameraPosition mCameraPosition;
-
-    // The entry point to the Places API.
     private PlacesClient mPlacesClient;
-
-    // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
-
-    // A default location (Sydney, Australia) and default zoom to use when location permission is
-    // not granted.
     private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
     private LatLng mSearchLocation;
     private LatLng mCurrentLocation;
@@ -67,12 +66,7 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
     private Marker currentMarker;
     private Marker prevMarker;
     private Button locButton;
-
-    // The geographical location where the device is currently located. That is, the last-known
-    // location retrieved by the Fused Location Provider.
     private Location mLastKnownLocation;
-
-    // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
@@ -179,6 +173,11 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
         return true;
     }
 
+
+    /**
+     * Updates map with new marker and removes old marker
+     * @param LatLngLocation
+     */
     public void updateAndReplaceMarker(LatLng LatLngLocation) {
         String clickedAddress = getAddress(LatLngLocation.latitude,LatLngLocation.longitude);
         // Creating a marker
