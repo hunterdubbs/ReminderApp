@@ -17,5 +17,7 @@
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
         app:showAsAction="always" />
+
 </menu>

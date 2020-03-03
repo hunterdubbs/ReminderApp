@@ -4,4 +4,17 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.cit368.reminderapp.MapsActivity" />
+    tools:context="net.cit368.reminderapp.MapsActivityCurrentPlace" >
+
+    <Button
+        android:id="@+id/btnLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/pick_place" />
+
+</fragment>
+
