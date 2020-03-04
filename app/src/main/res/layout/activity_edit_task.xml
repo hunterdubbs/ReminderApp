@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#1A1A1D">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="28dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTaskNameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColorHint="#C5C6C7">
+
+            <EditText
+                android:id="@+id/txtEditTaskName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#C5C6C7"
+                android:ems="10"
+                android:hint="Task Name"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="#C5C6C7"
+                android:textColorHighlight="#4E4E50"
+                android:textColorHint="#C5C6C7" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editDateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColorHint="#C5C6C7">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/editDateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_calendar_btn" />
+
+            <TextView
+                android:id="@+id/txtEditTaskDate"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#C5C6C7"
+                android:ems="10"
+                android:inputType="text"
+                android:maxLines="1"
+                android:text="mm/dd/yyyy"
+                android:textSize="25sp"
+                android:textColor="#C5C6C7"
+                android:textColorHighlight="#4E4E50"
+                android:textColorHint="#C5C6C7" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editLocLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColorHint="#C5C6C7">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/editLocBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_map_btn" />
+
+            <TextView
+                android:id="@+id/txtEditTaskLocation"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#C5C6C7"
+                android:ems="10"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="25sp"
+                android:hint="Task Location"
+                android:textColor="#C5C6C7"
+                android:textColorHighlight="#4E4E50"
+                android:textColorHint="#C5C6C7" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submitEditTask"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="#2196F3"
+            android:text="Submit Task"
+            android:textColor="#C5C6C7" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
