@@ -7,6 +7,7 @@ package net.cit368.reminderapp;
  *
  */
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -82,6 +83,17 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
 
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
+
+        locButton = findViewById(R.id.btnLocation);
+        locButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.putExtra("ADDRESS", getAddress(currentMarker.getPosition().latitude, currentMarker.getPosition().longitude));
+                setResult(2, intent);
+                finish();
+            }
+        });
 
         // Construct a PlacesClient
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
@@ -279,18 +291,6 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
             public void onMapClick(LatLng latLng) {
                 mClickedLocation = latLng;
                 updateAndReplaceMarker(mClickedLocation);
-            }
-        });
-
-        locButton = findViewById(R.id.btnLocation);
-        locButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                //will need updated for merge
-                Toast.makeText(getApplicationContext(),getAddress(currentMarker.getPosition().latitude, currentMarker.getPosition().longitude),Toast.LENGTH_LONG).show();
-                finish();
-                //startActivity(new Intent(MapsActivityCurrentPlace.this, TaskActivity.class));
             }
         });
 
