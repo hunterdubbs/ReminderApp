@@ -9,20 +9,6 @@
     android:padding="10dp"
     android:background="#1A1A1D">
 
-    <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="194dp"
-        android:layout_height="178dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:mipmap/sym_def_app_icon" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -36,7 +22,7 @@
         tools:layout_editor_absoluteX="28dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signup_input_layout_email"
+            android:id="@+id/taskNameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -44,69 +30,92 @@
             android:textColorHint="#C5C6C7">
 
             <EditText
-                android:id="@+id/txtUsername"
+                android:id="@+id/txtTaskName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
+                android:hint="Task Name"
+                android:inputType="text"
+                android:maxLines="1"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
                 android:textColorHint="#C5C6C7" />
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signup_input_layout_password"
+            android:id="@+id/getDateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:textColorHint="#C5C6C7">
 
-            <EditText
-                android:id="@+id/txtPassword"
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/dateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_calendar_btn" />
+
+            <TextView
+                android:id="@+id/txtTaskDate"
                 android:layout_width="match_parent"
+                android:editable="false"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Password (8-40 chars)"
-                android:inputType="textPassword"
+                android:inputType="text"
+                android:maxLines="1"
+                android:text="mm/dd/yyyy"
+                android:textSize="25sp"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
                 android:textColorHint="#C5C6C7" />
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signup_input_layout_confirmpw"
+            android:id="@+id/getLocLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:textColorHint="#C5C6C7">
 
-            <EditText
-                android:id="@+id/txtConfirmPassword"
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/locBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_map_btn" />
+
+            <TextView
+                android:id="@+id/txtTaskLocation"
                 android:layout_width="match_parent"
+                android:editable="false"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Confirm Password"
-                android:inputType="textPassword"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="25sp"
+                android:hint="Task Location"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
                 android:textColorHint="#C5C6C7" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/submitTask"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="#2196F3"
-            android:text="Register"
+            android:text="Submit Task"
             android:textColor="#C5C6C7" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

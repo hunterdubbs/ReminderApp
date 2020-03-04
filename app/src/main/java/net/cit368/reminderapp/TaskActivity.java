@@ -51,7 +51,7 @@ public class TaskActivity extends AppCompatActivity {
         taskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createTask(view);
+                startActivity(new Intent(TaskActivity.this, CreateTaskActivity.class));
             }
         });
         accountBtn.setOnClickListener(new View.OnClickListener() {
@@ -62,22 +62,5 @@ public class TaskActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Launches a popup allowing users to enter information to create a new task
-     * @param v
-     */
-    private void createTask(View v) {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.task_popup, null);
-
-        //Create popup
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = false;
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-        //Show popup
-        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-    }
 
 }
