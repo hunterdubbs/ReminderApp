@@ -1,7 +1,9 @@
 package net.cit368.reminderapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,17 +25,20 @@ import net.cit368.reminderapp.R;
 import java.util.ArrayList;
 
 /**
- * @author Tyler Kroposki
+ * @author Tyler Kroposki, HUnter Dubbs
+ * @version 3/4/2020
  * RecyclerView adapter to add the File information for each file in a User's SFTP directory.
  */
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
     private ArrayList<TaskItem> taskList;
     private LayoutInflater inflator;
+    private Context context;
 
     TaskAdapter(Context context, ArrayList<TaskItem> data) {
         this.inflator = LayoutInflater.from(context);
         this.taskList = data;
+        this.context = context;
     }
 
     //Inflate row from fileitem xml
@@ -45,9 +50,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
     //Put the text into the TextView
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        String taskName = taskList.get(position).getTaskName();
+        final String taskName = taskList.get(position).getTaskName();
         String taskDate = String.valueOf(taskList.get(position).getTaskDate());
         String taskLocation = String.valueOf(taskList.get(position).getTaskLocation());
 
@@ -59,6 +64,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
         }else{
             holder.itemView.setBackgroundColor(Color.LTGRAY);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, EditTaskActivity.class)
+                        .putExtra("taskId", taskList.get(position).getTaskId())
+                        .putExtra("taskName", taskList.get(position).getTaskName())
+                        .putExtra("taskDate", taskList.get(position).getTaskDate())
+                        .putExtra("taskLocation", taskList.get(position).getTaskLocation())
+                        .putExtra("taskComplete", taskList.get(position).getComplete()));
+            }
+        });
 
     }
 

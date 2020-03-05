@@ -1,12 +1,5 @@
 package net.cit368.reminderapp;
 
-/**
- *  Class is used to operate the map functions for the user to choose a location
- *
- *
- *
- */
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -46,6 +39,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
+ * author Tyler Mankey
+ * @version 3/5/2020
  * An activity that displays a map showing the place at the device's current location.
  */
 public class MapsActivityCurrentPlace extends AppCompatActivity

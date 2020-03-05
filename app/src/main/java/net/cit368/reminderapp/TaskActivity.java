@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -33,7 +34,7 @@ import java.util.Map;
 
 /**
  * @author Tyler Kroposki, Hunter Dubbs
- * @version 2/29/2020
+ * @version 3/4/2020
  * This is the core activity of the app. It displays the existing tasks of the user and allows
  * for new tasks to be created.
  */

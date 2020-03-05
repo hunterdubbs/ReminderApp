@@ -58,7 +58,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CreateTaskActivity.this, MapsActivityCurrentPlace.class);
-                startActivityForResult(intent, 2);// Activity is started with requestCode 2
+                startActivityForResult(intent, 2);
             }
         });
 
@@ -109,7 +109,7 @@ public class CreateTaskActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // check if the request code is same as what is passed
-        TextView locationText = (TextView) findViewById(R.id.txtTaskLocation);
+        TextView locationText = findViewById(R.id.txtTaskLocation);
 
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2) {

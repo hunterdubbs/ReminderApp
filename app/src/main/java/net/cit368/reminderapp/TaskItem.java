@@ -21,6 +21,7 @@ public class TaskItem {
         this.taskDate = taskDate;
         this.isComplete = isComplete;
         this.taskLocation = taskLocation;
+        this.taskId = taskId;
     }
 
     public TaskItem(){
