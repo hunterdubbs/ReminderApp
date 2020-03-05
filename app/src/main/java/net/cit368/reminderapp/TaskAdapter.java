@@ -1,14 +1,26 @@
 package net.cit368.reminderapp;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import net.cit368.reminderapp.R;
+
+import java.util.ArrayList;
 
 /**
  * @author Tyler Kroposki
@@ -16,10 +28,10 @@ import net.cit368.reminderapp.R;
  */
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
-    private TaskItem[] taskList;
+    private ArrayList<TaskItem> taskList;
     private LayoutInflater inflator;
 
-    TaskAdapter(Context context, TaskItem[] data) {
+    TaskAdapter(Context context, ArrayList<TaskItem> data) {
         this.inflator = LayoutInflater.from(context);
         this.taskList = data;
     }
@@ -35,35 +47,36 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        String taskName = taskList[position].getTaskName();
-        String taskDate = String.valueOf(taskList[position].getTaskDate());
-        String taskDuration = String.valueOf(taskList[position].getTaskDuration());
-        String taskLocation = String.valueOf(taskList[position].getTaskLocation());
+        String taskName = taskList.get(position).getTaskName();
+        String taskDate = String.valueOf(taskList.get(position).getTaskDate());
+        String taskLocation = String.valueOf(taskList.get(position).getTaskLocation());
 
         holder.taskName.setText(taskName);
         holder.taskDate.setText("Date: " + taskDate);
-        holder.taskDuration.setText("Last Duration: " + taskDuration);
         holder.taskLocation.setText("Location: " + taskLocation);
+        if(taskList.get(position).getComplete()){
+            holder.itemView.setBackgroundColor(Color.GREEN);
+        }else{
+            holder.itemView.setBackgroundColor(Color.LTGRAY);
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return taskList.length;
+        return taskList.size();
     }
 
     //Stores the views
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView taskName;
         TextView taskDate;
-        TextView taskDuration;
         TextView taskLocation;
 
         ViewHolder(View itemView) {
             super(itemView);
             taskName = itemView.findViewById(R.id.recycleTaskName);
             taskDate = itemView.findViewById(R.id.recycleTaskDate);
-            taskDuration = itemView.findViewById(R.id.recycleTaskDuration);
             taskLocation = itemView.findViewById(R.id.recycleTaskLocation);
         }
 

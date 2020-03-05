@@ -22,14 +22,14 @@ import java.util.List;
 
 /**
  * @Author Hunter Dubbs
- * @version 2/29/2020
+ * @version 3/4/2020
  * This class allows the user to sign in to their account or create a new one.
  */
 public class MainActivity extends AppCompatActivity {
 
     private static final int SIGNIN_CODE = 1, REGISTER_CODE = 2;
-    public FirebaseAuth auth;
-    public FirebaseUser user;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
 
     /**
      * Setup buttons and button click handlers
@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //for Maps Testing
-        startActivity(new Intent(MainActivity.this, MapsActivityCurrentPlace.class));
 
         auth = FirebaseAuth.getInstance();
         Button btnSignin = findViewById(R.id.btn_signin);
@@ -121,17 +118,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    //Not needed here, handled in TaskActivity.
-//    public void signOut() {
-//        AuthUI.getInstance()
-//                .signOut(this)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        System.out.println("LOGGED OUT");
-//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                    }
-//                });
-//    }
 
 }
