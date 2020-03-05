@@ -24,7 +24,7 @@ import com.google.firebase.internal.InternalTokenProvider;
  */
 public class AccountActivity extends AppCompatActivity {
 
-    String oldPassword, newPassword, confirmPassword;
+    String newPassword, confirmPassword;
 
     /**
      * setup form fields and button handlers

@@ -2,6 +2,7 @@ package net.cit368.reminderapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -23,7 +24,8 @@ import java.util.List;
 /**
  * @Author Hunter Dubbs
  * @version 3/4/2020
- * This class allows the user to sign in to their account or create a new one.
+ * This activity allows the user to sign in to their account or create a new one.
+ * It is the entry point of the app.
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -65,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         user = auth.getCurrentUser();
-        //the user can bypass sign in if they are already signed in
+        //the user can bypass sign in if they are already loggged in
         if(user != null){
             startActivity(new Intent(MainActivity.this, TaskActivity.class));
         }
     }
 
     /**
-     * Utilizes the Firebase AuthUI built-in class to handle exister user login
+     * Utilizes the Firebase AuthUI built-in class to handle existing user login
      */
     public void createSigninIntent(){
         List<AuthUI.IdpConfig> signinMethods = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build());
@@ -88,29 +90,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SIGNIN_CODE) {
+        if (requestCode == SIGNIN_CODE) { //handle sign in results
             IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 startActivity(new Intent(MainActivity.this, TaskActivity.class));
-                System.out.println("======================LOG IN SUCCESSFUL======================");
+                Log.i("Auth", "Log in successful");
             } else {
                 Toast.makeText(MainActivity.this, "Log In Failed", Toast.LENGTH_SHORT).show();
-                System.out.println("======================LOG IN FAILURE======================");
+                Log.e("Auth", "Log in failure");
             }
-        }else if(requestCode == REGISTER_CODE){
+        }else if(requestCode == REGISTER_CODE){ //handle register results
             Bundle extras = data.getExtras();
             if(resultCode == RESULT_OK){
                 auth.createUserWithEmailAndPassword(extras.getString("username"), extras.getString("password")).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            System.out.println("======================user created successfully======================");
+                            Log.i("Auth", "User created");
                             user = auth.getCurrentUser();
-                            Toast.makeText(MainActivity.this, "Log In Successful", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, TaskActivity.class));
                         }else{
-                            System.out.println("======================create account failed======================");
+                            Log.e("Auth", "User creation failed");
                             Toast.makeText(MainActivity.this, "Could not create account", Toast.LENGTH_LONG).show();
                         }
                     }

@@ -21,6 +21,7 @@ import java.util.Calendar;
 /**
  * @author Hunter Dubbs
  * @version 3/5/2020
+ * This activity is called when a user clicks on a task in the RecyclerView to edit it.
  */
 public class EditTaskActivity extends AppCompatActivity {
 
@@ -34,12 +35,8 @@ public class EditTaskActivity extends AppCompatActivity {
     private String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     /**
-     *
-     *  TaskActivity -> (Task Intent)
-     *                  EditTaskActivity
-     *                      -> Modify Text
-     *                      -> Submit
-     *                      -> Return to MainActivity & Refresh RecyclerView
+     * Bind the input fields and setup button handlers
+     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +60,7 @@ public class EditTaskActivity extends AppCompatActivity {
         dateText.setText(date);
         locationText.setText(location);
 
+        //submit button
         Button btnSubmit = findViewById(R.id.submitEditTask);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +92,12 @@ public class EditTaskActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Callback method used by location picker
+     * @param requestCode request code of location picker
+     * @param resultCode result code of location picker
+     * @param data data returned from location picker
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -126,10 +130,18 @@ public class EditTaskActivity extends AppCompatActivity {
         datePicker.show();
     }
 
+    /**
+     * Validates all fields in the activity
+     * @return true if fields validate successfully
+     */
     private boolean validate(){
         return validateTaskName() && validateTaskDate() && validateTaskLocation();
     }
 
+    /**
+     * Validates the task name to ensure it exists
+     * @return true if task name validates successfully
+     */
     private boolean validateTaskName(){
         if(name != null && !name.isEmpty()){
             return true;
@@ -138,6 +150,10 @@ public class EditTaskActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Validates the task date to ensure it is set
+     * @return true if task date validates successfully
+     */
     private boolean validateTaskDate(){
         if(date != null && !date.isEmpty()){
             return true;
@@ -146,6 +162,10 @@ public class EditTaskActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Validates the task location to ensure one is set
+     * @return true if task location validates successfully
+     */
     private boolean validateTaskLocation(){
         if(location != null && !location.isEmpty()){
             return true;

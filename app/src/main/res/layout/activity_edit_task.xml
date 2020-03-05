@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Task Name"
+                android:hint="@string/txt_task_name"
                 android:inputType="text"
                 android:maxLines="1"
                 android:textColor="#C5C6C7"
@@ -101,7 +101,7 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:textSize="25sp"
-                android:hint="Task Location"
+                android:hint="@string/txt_task_location"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
                 android:textColorHint="#C5C6C7" />
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="#2196F3"
-            android:text="Submit Task"
+            android:text="@string/txt_submit_task"
             android:textColor="#C5C6C7" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

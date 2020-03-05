@@ -3,13 +3,8 @@ package net.cit368.reminderapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Tyler Kroposki, Hunter Dubbs
@@ -42,13 +35,16 @@ public class TaskActivity extends AppCompatActivity {
 
     private DatabaseReference database;
     private String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+    //will hold returned tasks from database
     private ArrayList<TaskItem> taskList;
     private ArrayList<String> taskIdList;
+
     private TaskAdapter taskAdapter;
     private RecyclerView recyclerView;
 
     /**
-     * Setup form buttons and handlers
+     * Setup form buttons and data handlers
      * @param savedInstanceState
      */
     @Override
@@ -59,24 +55,27 @@ public class TaskActivity extends AppCompatActivity {
         final Button logoutBtn = findViewById(R.id.logoutBtn);
         final Button taskBtn = findViewById(R.id.newTaskBtn);
         final Button accountBtn = findViewById(R.id.accountBtn);
+        //logout
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AuthUI.getInstance().signOut(getApplicationContext())
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             public void onComplete(@NonNull Task<Void> task) {
-                                System.out.println("======================LOG OUT SUCCESSFUL======================");
+                                Log.i("Auth", "Logged out");
                                 startActivity(new Intent(TaskActivity.this, MainActivity.class));
                             }
                         });
             }
         });
+        //add task
         taskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(TaskActivity.this, CreateTaskActivity.class));
             }
         });
+        //change account password
         accountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +83,7 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
 
-        //stores tasks
+        //stores tasks for signed in user
         database = FirebaseDatabase.getInstance().getReference().child("users").child(userUid).child("tasks");
         taskList = new ArrayList<>();
         taskIdList = new ArrayList<>();
@@ -104,7 +103,7 @@ public class TaskActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("Database Error", "Error getting database snapshot", databaseError.toException());
+                Log.w("Database Error", "Could not retrieve database entries", databaseError.toException());
             }
         });
 
@@ -112,7 +111,7 @@ public class TaskActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.taskRecyclerView);
         taskAdapter = new TaskAdapter(this, taskList);
 
-        //swipe right to complete or reset completion task and left to remove task
+        //swipe right to complete or reset completion of task and left to remove task
         ItemTouchHelper completeTaskHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -122,7 +121,7 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int targetPos = viewHolder.getAdapterPosition();
-                if(direction == ItemTouchHelper.RIGHT){
+                if(direction == ItemTouchHelper.RIGHT){ //toggle complete
                     if(taskList.get(targetPos).getComplete()) {
                         database.child(taskIdList.get(targetPos)).child("complete").setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -141,7 +140,7 @@ public class TaskActivity extends AppCompatActivity {
                         taskList.get(targetPos).setComplete(true);
                     }
                     taskAdapter.notifyItemChanged(targetPos);
-                }else if(direction == ItemTouchHelper.LEFT){
+                }else if(direction == ItemTouchHelper.LEFT){ //remove task
                     database.child(taskIdList.get(targetPos)).removeValue();
                     taskList.remove(targetPos);
                     taskIdList.remove(targetPos);
@@ -151,6 +150,7 @@ public class TaskActivity extends AppCompatActivity {
         });
         completeTaskHelper.attachToRecyclerView(recyclerView);
 
+        //bind adapter to RecyclerView
         recyclerView.setAdapter(taskAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

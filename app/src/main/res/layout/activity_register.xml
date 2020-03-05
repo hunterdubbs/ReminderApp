@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Email"
+                android:hint="@string/reg_email"
                 android:inputType="textEmailAddress"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Password (8-40 chars)"
+                android:hint="@string/reg_password"
                 android:inputType="textPassword"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Confirm Password"
+                android:hint="@string/reg_password2"
                 android:inputType="textPassword"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="#2196F3"
-            android:text="Register"
+            android:text="@string/btn_register"
             android:textColor="#C5C6C7" />
 
     </LinearLayout>

@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="New Password (8-40 chars)"
+                android:hint="@string/txt_new_password"
                 android:inputType="textPassword"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#C5C6C7"
                 android:ems="10"
-                android:hint="Confirm New Password"
+                android:hint="@string/txt_new_verify"
                 android:inputType="textPassword"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="#2196F3"
-            android:text="Update Password"
+            android:text="@string/txt_update_password"
             android:textColor="#C5C6C7" />
 
     </LinearLayout>

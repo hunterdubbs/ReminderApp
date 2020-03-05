@@ -25,9 +25,9 @@ import net.cit368.reminderapp.R;
 import java.util.ArrayList;
 
 /**
- * @author Tyler Kroposki, HUnter Dubbs
- * @version 3/4/2020
- * RecyclerView adapter to add the File information for each file in a User's SFTP directory.
+ * @author Tyler Kroposki, Hunter Dubbs
+ * @version 3/5/2020
+ * RecyclerView adapter to bind data to the item views.
  */
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
@@ -35,20 +35,34 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
     private LayoutInflater inflator;
     private Context context;
 
+    /**
+     * Constructor for the adapter that includes the TaskActivity context and the data to display
+     * @param context the TaskActivity context
+     * @param data and ArrayList of TaskItem objects to be displayed
+     */
     TaskAdapter(Context context, ArrayList<TaskItem> data) {
         this.inflator = LayoutInflater.from(context);
         this.taskList = data;
         this.context = context;
     }
 
-    //Inflate row from fileitem xml
+    /**
+     * Inflates each object from the xml specification
+     * @param parent the parent of the ViewHolder
+     * @param viewType the type of view
+     * @return the ViewHolder with the inflated items
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflator.inflate(R.layout.fileitem, parent, false);
         return new ViewHolder(view);
     }
 
-    //Put the text into the TextView
+    /**
+     * Binds the tasks to items in the ViewHolder
+     * @param holder the ViewHolder containing the items
+     * @param position the position of the item being bound
+     */
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
@@ -59,14 +73,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
         holder.taskName.setText(taskName);
         holder.taskDate.setText("Date: " + taskDate);
         holder.taskLocation.setText("Location: " + taskLocation);
+        //color items based upon their completion status
         if(taskList.get(position).getComplete()){
             holder.itemView.setBackgroundColor(Color.GREEN);
         }else{
             holder.itemView.setBackgroundColor(Color.LTGRAY);
         }
+        //click items to edit them
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //pass information about the task to the EditTaskActivity so that it can be modified
                 context.startActivity(new Intent(context, EditTaskActivity.class)
                         .putExtra("taskId", taskList.get(position).getTaskId())
                         .putExtra("taskName", taskList.get(position).getTaskName())
@@ -78,12 +95,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
     }
 
+    /**
+     * Gets a count of the number of tasks
+     * @return the number of tasks
+     */
     @Override
     public int getItemCount() {
         return taskList.size();
     }
 
-    //Stores the views
+    /**
+     * The base ViewHolder that displays the task name, date, and location
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView taskName;
         TextView taskDate;

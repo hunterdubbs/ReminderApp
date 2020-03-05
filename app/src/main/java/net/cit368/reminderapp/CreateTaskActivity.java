@@ -21,6 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
+/**
+ * @author Hunter Dubbs, TYler Kroposki
+ * @version 3/4/2020
+ * This activity allows the user to create a new task to be added to their list.
+ */
 public class CreateTaskActivity extends AppCompatActivity {
 
     private TextView dateText, txtTaskName;
@@ -32,21 +37,26 @@ public class CreateTaskActivity extends AppCompatActivity {
     private DatabaseReference database;
     private String userUid;
 
+    /**
+     * Create and bind input fields and button click handlers
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
 
+        //get firebase references
         database = FirebaseDatabase.getInstance().getReference();
         userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        dateBtn = (AppCompatImageButton) findViewById(R.id.dateBtn);
-        locBtn = (AppCompatImageButton) findViewById(R.id.locBtn);
-        submitBtn = (Button) findViewById(R.id.submitTask);
-        dateText = (TextView) findViewById(R.id.txtTaskDate);
+        dateBtn = findViewById(R.id.dateBtn);
+        locBtn = findViewById(R.id.locBtn);
+        submitBtn = findViewById(R.id.submitTask);
+        dateText = findViewById(R.id.txtTaskDate);
         txtTaskName = findViewById(R.id.txtTaskName);
 
-        //Prompt date picker
+        //date picker
         dateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +64,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
         });
 
+        //location picker
         locBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,10 +88,18 @@ public class CreateTaskActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Validates all fields in the activity
+     * @return true if fields validate successfully
+     */
     private boolean validate(){
         return validateTaskName() && validateTaskDate() && validateTaskLocation();
     }
 
+    /**
+     * Validates the task name to ensure it exists
+     * @return true if task name validates successfully
+     */
     private boolean validateTaskName(){
         if(taskName != null && !taskName.isEmpty()){
             return true;
@@ -89,6 +108,10 @@ public class CreateTaskActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Validates the task date to ensure it is set
+     * @return true if task date validates successfully
+     */
     private boolean validateTaskDate(){
         if(date != null && !date.isEmpty()){
             return true;
@@ -97,6 +120,10 @@ public class CreateTaskActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Validates the task location to ensure one is set
+     * @return true if task location validates successfully
+     */
     private boolean validateTaskLocation(){
         if(location != null && !location.isEmpty()){
             return true;
@@ -105,12 +132,16 @@ public class CreateTaskActivity extends AppCompatActivity {
         return false;
     }
 
-    // Call Back method  to get the Message form other Activity
+
+    /**
+     * Callback method to handle returned data from location picker activity
+     * @param requestCode request code of location picker
+     * @param resultCode result code of location picker
+     * @param data data returned from location picker
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // check if the request code is same as what is passed
         TextView locationText = findViewById(R.id.txtTaskLocation);
-
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2) {
             location = data.getStringExtra("ADDRESS");
@@ -128,7 +159,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         final int month = calendar.get(Calendar.MONTH);
         final int year = calendar.get(Calendar.YEAR);
 
-        //Date picker dialogue box
         datePicker = new DatePickerDialog(CreateTaskActivity.this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
