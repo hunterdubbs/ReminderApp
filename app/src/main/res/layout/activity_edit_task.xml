@@ -40,7 +40,8 @@
                 android:maxLines="1"
                 android:textColor="#C5C6C7"
                 android:textColorHighlight="#4E4E50"
-                android:textColorHint="#C5C6C7" />
+                android:textColorHint="#C5C6C7"
+                android:maxLength="200"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
